@@ -1,4 +1,3 @@
-import FormFilterComponents from "src/decidim/form_filter.js";
 import GlideBuilder from "../glideBuilder";
 import GlideItem from "./glideItems/GlideItem";
 import Proposal from "./glideItems/Proposal";
@@ -15,7 +14,6 @@ export default class Manager {
     constructor($proposalsSlider, $proposalsGlideItems, $glideBullets, $formFilter) {
         this.$proposalSlider = $proposalsSlider;
         this.$proposalsGlideItems = $proposalsGlideItems;
-        this.formFilterComponent = new FormFilterComponents($formFilter);
         this.$loading = this.$proposalSlider.find(".loading");
     }
 
@@ -26,7 +24,18 @@ export default class Manager {
 
     // @return String - Filter params query string
     filterURIParams() {
-        return this.formFilterComponent._currentStateAndPath()[0];
+        const filterForm = $("form.new_filter")
+        const formAction = filterForm.attr("action");
+        const params = filterForm.find("select:not(.ignore-filter)").serialize();
+
+        let path = "";
+
+        if (formAction.indexOf("?") < 0) {
+            path = `${formAction}?${params}`;
+        } else {
+            path = `${formAction}&${params}`;
+        }
+        return path;
     }
 
     // Clears Glide carousel and display loader
