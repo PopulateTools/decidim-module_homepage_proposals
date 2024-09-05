@@ -1,0 +1,3 @@
+<!-- insert_before "erb[loud]:contains('layouts/decidim/admin/application')" -->
+
+<%= append_javascript_pack_tag("decidim_homepage_proposals_admin") %>
