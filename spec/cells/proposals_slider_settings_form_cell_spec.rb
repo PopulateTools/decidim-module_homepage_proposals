@@ -43,12 +43,12 @@ module Decidim
           let!(:default_linked_component) { proposals_component.id }
 
           it "returns an array with the proposals components" do
-            expect(subject.options_for_proposals_components).to include("<option selected=\"selected\" value=\"#{proposals_component.id}\">#{translated_attribute(proposals_component.name)} (#{translated_attribute(proposals_component.participatory_space.title)})</option>")
-            expect(subject.options_for_proposals_components).to include("<option selected=\"selected\" value=\"#{proposals_component2.id}\">#{translated_attribute(proposals_component2.name)} (#{translated_attribute(proposals_component2.participatory_space.title)})</option>")
-            expect(subject.options_for_proposals_components).to include("<option value=\"#{proposals_component3.id}\">#{translated_attribute(proposals_component3.name)} (#{translated_attribute(proposals_component3.participatory_space.title)})</option>")
+            expect(subject.options_for_proposals_components).to include("<option selected=\"selected\" value=\"#{proposals_component.id}\">#{decidim_escape_translated(proposals_component.name)} (#{decidim_escape_translated(proposals_component.participatory_space.title)})</option>")
+            expect(subject.options_for_proposals_components).to include("<option selected=\"selected\" value=\"#{proposals_component2.id}\">#{decidim_escape_translated(proposals_component2.name)} (#{decidim_escape_translated(proposals_component2.participatory_space.title)})</option>")
+            expect(subject.options_for_proposals_components).to include("<option value=\"#{proposals_component3.id}\">#{decidim_escape_translated(proposals_component3.name)} (#{decidim_escape_translated(proposals_component3.participatory_space.title)})</option>")
 
-            expect(subject.options_for_default_component).to include("<option selected=\"selected\" value=\"#{proposals_component.id}\">#{translated_attribute(proposals_component.name)} (#{translated_attribute(proposals_component.participatory_space.title)})</option>")
-            expect(subject.options_for_default_component).to include("<option value=\"#{proposals_component2.id}\">#{translated_attribute(proposals_component2.name)} (#{translated_attribute(proposals_component2.participatory_space.title)})</option>")
+            expect(subject.options_for_default_component).to include("<option selected=\"selected\" value=\"#{proposals_component.id}\">#{decidim_escape_translated(proposals_component.name)} (#{decidim_escape_translated(proposals_component.participatory_space.title)})</option>")
+            expect(subject.options_for_default_component).to include("<option value=\"#{proposals_component2.id}\">#{decidim_escape_translated(proposals_component2.name)} (#{decidim_escape_translated(proposals_component2.participatory_space.title)})</option>")
           end
         end
       end
