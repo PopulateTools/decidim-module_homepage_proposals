@@ -3,7 +3,7 @@
 module Decidim
   module HomepageProposals
     module ContentBlocks
-      class ProposalsSliderCell < Decidim::ViewModel
+      class ProposalsSliderCell < Decidim::ContentBlocks::BaseCell
         attr_accessor :glanced_proposals
 
         include Cell::ViewModel::Partial
@@ -13,6 +13,7 @@ module Decidim
         include Decidim::FiltersHelper
         include Decidim::FilterResource
         include Decidim::ComponentPathHelper
+        include Decidim::ScopesHelper
 
         def default_linked_component_path
           main_component_path(Decidim::Component.find(selected_component_id))

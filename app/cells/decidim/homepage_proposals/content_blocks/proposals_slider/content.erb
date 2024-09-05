@@ -1,0 +1,29 @@
+<div class="home__section-header">
+  <h2 class="home__section-title">
+    <%= t("decidim.homepage_proposals.proposal_at_a_glance.title") %>
+  </h2>
+</div>
+
+<div class="filters_container" <%= 'style="display: none"' unless content_block_settings.activate_filters %>>
+  <%= render partial: "decidim/shared/homepage_proposals/filters" %>
+</div>
+<div id="proposals_slider">
+  <div class="glide margin-top-3">
+    <div class="column small-12">
+      <p class="loading text-center"><%= t(".loading") %></p>
+    </div>
+    <div class="glide__track row small-12 column" data-glide-el="track">
+      <ul class="glide__slides" id="proposals_glide_items">
+        <%# Content loaded by 'app/packs/src/decidim/homepage_proposals/main.js' %>
+      </ul>
+    </div>
+    <div class="glide__bullets" data-glide-el="controls[nav]">
+      <div class="glide__bullet" data-glide-dir="<">
+        <%= icon "arrow-left-s-line", class: "flash__icon" %>
+      </div>
+      <div class="glide__bullet" data-glide-dir=">">
+        <%= icon "arrow-right-s-line", class: "flash__icon" %>
+      </div>
+    </div>
+  </div>
+</div>
