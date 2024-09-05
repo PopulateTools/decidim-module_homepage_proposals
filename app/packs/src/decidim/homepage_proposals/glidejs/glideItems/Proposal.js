@@ -10,14 +10,12 @@ export default class Proposal extends GlideItem {
         this.state = obj.state || 'not answered' ;
         this.stateI18n = obj.state_i18n;
         this.color = obj.state_css_class;
-        this.scope = obj.scope;
-        this.category = obj.category;
+        this.tags = obj.tags;
     }
 
     getTagsTemplate() {
         return `<ul class="tags tags--proposal">
-    ${this.category}
-    ${this.scope}
+    ${this.tags}
 </ul>`
     }
 
