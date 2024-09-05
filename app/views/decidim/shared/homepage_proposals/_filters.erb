@@ -2,16 +2,7 @@
   <div class="row">
     <div class="columns flex-v-center">
       <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></p>
-      <div class="medium-2 mediumlarge-3">
-        <%= cell(
-              "decidim/scopes_picker",
-              form,
-              attribute: :scope_id,
-              multiple: true,
-              label: false,
-              checkboxes_on_top: false
-            ) %>
-      </div>
+      <%= scopes_select_field form, :scope_id, root: nil %>
       <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.about") %></p>
       <div class="medium-2">
         <%= form.categories_select :category_id,
