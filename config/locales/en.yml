@@ -4,25 +4,24 @@ en:
     homepage_proposals:
       content_blocks:
         proposals_slider:
-          content:
-            loading: Loading...
           filters_small_view:
             close_modal: Close modal
             filter: Filter
             filter_by: Filter by
             unfold: Unfold
           learn_more: Learn more
+          loading: Loading...
           name: Proposals slider
           search: Search
         proposals_slider_settings_form:
           activate_filters: Activate filters
           default_linked_component: Component displayed by default
           linked_components_id: Components available in filters
+          max_results: Maximum amount of elements to show
+          order: Order elements by
           show:
             least_recent: Least recent
-            max_results: Maximum amount of elements to show
             most_recent: Most recent
-            order: Order elements by
             random: Random
       proposal_at_a_glance:
         filters:
