@@ -34,7 +34,7 @@ module Decidim
             settings.attribute :linked_components_id, type: :array
             settings.attribute :default_linked_component, type: :integer
             settings.attribute :order, type: :string
-            settings.attribute :max_results, type: :integer
+            settings.attribute :max_results, type: :integer, default: 12
           end
         end
       end
