@@ -8,4 +8,6 @@
                  options_for_default_component,
                  { include_blank: false, label: t(".default_linked_component") },
                  class: "chosen-select" %>
+  <%= settings_fields.select :order, order_options, prompt: "", label: t(".order") %>
+  <%= settings_fields.select :max_results, [*(4..12)], prompt: "", label: t(".max_results") %>
 <% end %>

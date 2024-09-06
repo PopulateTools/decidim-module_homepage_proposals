@@ -30,6 +30,14 @@ module Decidim
         def proposals_components
           @proposals_components ||= Decidim::Component.where(manifest_name: "proposals").published
         end
+
+        def order_options
+          [
+            [I18n.t("most_recent", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show"), "most_recent"],
+            [I18n.t("least_recent", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show"), "least_recent"],
+            [I18n.t("random", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show"), "random"]
+          ]
+        end
       end
     end
   end

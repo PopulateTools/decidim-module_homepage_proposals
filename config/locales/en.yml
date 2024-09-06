@@ -18,6 +18,12 @@ en:
           activate_filters: Activate filters
           default_linked_component: Component displayed by default
           linked_components_id: Components available in filters
+          show:
+            least_recent: Least recent
+            max_results: Maximum amount of elements to show
+            most_recent: Most recent
+            order: Order elements by
+            random: Random
       proposal_at_a_glance:
         filters:
           about: about
