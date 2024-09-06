@@ -3,7 +3,11 @@
 require "decidim/dev/common_rake"
 
 desc "Generates a dummy app for testing"
-task test_app: "decidim:generate_external_test_app"
+
+task test_app: "decidim:generate_external_test_app" do
+  ENV["RAILS_ENV"] = "test"
+  install_module("spec/decidim_dummy_app")
+end
 
 desc "Generates a development app."
 task :development_app do
@@ -26,5 +30,11 @@ end
 def seed_slider(path)
   Dir.chdir(path) do
     system("bundle exec rake decidim:homepage_proposals:seed")
+  end
+end
+
+def install_module(path)
+  Dir.chdir(path) do
+    system("bundle exec rake decidim_module_homepage_proposals:webpacker:install")
   end
 end
