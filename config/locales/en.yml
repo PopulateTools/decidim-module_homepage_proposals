@@ -4,13 +4,14 @@ en:
     homepage_proposals:
       content_blocks:
         proposals_slider:
+          content:
+            loading: Loading...
           filters_small_view:
             close_modal: Close modal
             filter: Filter
             filter_by: Filter by
             unfold: Unfold
           learn_more: Learn more
-          loading: Loading...
           name: Proposals slider
           search: Search
         proposals_slider_settings_form:
