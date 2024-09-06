@@ -15,7 +15,8 @@ describe "Admin manages proposals slider content blocks", type: :system do
     it "shows the proposals slider one" do
       visit decidim_admin.edit_organization_homepage_path
 
-      within ".js-list-availables" do
+      click_on "Add content block"
+      within "#add-content-block-dropdown" do
         expect(page).to have_content("Proposals slider")
       end
     end
@@ -29,7 +30,7 @@ describe "Admin manages proposals slider content blocks", type: :system do
       let!(:proposals) { create_list(:proposal, 12, component: proposals_component3) }
 
       it "updates the settings of the content block" do
-        visit decidim_admin.edit_organization_homepage_content_block_path(:proposals_slider)
+        visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
 
         check "Activate filters"
 
