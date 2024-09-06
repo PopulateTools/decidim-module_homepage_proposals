@@ -4,7 +4,7 @@ on: [push]
 env:
   CI: "true"
   CODECOV: "true"
-  RUBY_VERSION: 3.0.2
+  RUBY_VERSION: 3.1.2
   DECIDIM_MODULE: .
 
 jobs:
