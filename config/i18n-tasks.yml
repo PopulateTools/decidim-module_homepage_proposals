@@ -17,6 +17,7 @@ ignore_unused:
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.activate_filters
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.default_linked_component
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.linked_components_id
+  - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.block_title
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.max_results
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.order
   - decidim.homepage_proposals.proposal_at_a_glance.filters.categories
@@ -33,6 +34,7 @@ ignore_missing:
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show.activate_filters
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show.linked_components_id
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show.default_linked_component
+  - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show.block_title
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show.max_results
   - decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show.order
   - decidim.shared.homepage_proposals.filters_small_view.filters_small_view.filter

@@ -15,6 +15,7 @@ en:
           search: Search
         proposals_slider_settings_form:
           activate_filters: Activate filters
+          block_title: Block title
           default_linked_component: Component displayed by default
           linked_components_id: Components available in filters
           max_results: Maximum amount of elements to show

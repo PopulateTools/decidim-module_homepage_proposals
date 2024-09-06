@@ -35,6 +35,7 @@ module Decidim
             settings.attribute :default_linked_component, type: :integer
             settings.attribute :order, type: :string
             settings.attribute :max_results, type: :integer, default: 12
+            settings.attribute :block_title, type: :text, translated: true, preview: -> { I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title") }
           end
         end
       end

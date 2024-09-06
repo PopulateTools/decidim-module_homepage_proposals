@@ -10,4 +10,5 @@
                  class: "chosen-select" %>
   <%= settings_fields.select :order, order_options, prompt: "", label: t(".order") %>
   <%= settings_fields.select :max_results, [*(4..12)], prompt: "", label: t(".max_results") %>
+  <%= settings_fields.translated :text_field, :block_title, label: t(".block_title") %>
 <% end %>

@@ -63,6 +63,10 @@ module Decidim
         def max_results_config
           content_block_settings.max_results.presence || 12
         end
+
+        def title
+          translated_attribute(content_block_settings.block_title).presence || I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title")
+        end
       end
     end
   end
