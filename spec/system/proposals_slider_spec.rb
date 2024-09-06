@@ -29,8 +29,8 @@ describe "Homepage proposals slider", type: :system, js: true do
     it "displays the slider but not the filters" do
       visit decidim.root_path
 
-      expect(page).to have_content("EXPLORE PROPOSALS")
-      expect(page).not_to have_css(".filters")
+      expect(page).to have_content("Explore proposals")
+      expect(page).not_to have_css(".filters_container")
     end
 
     context "and filters" do
@@ -39,8 +39,8 @@ describe "Homepage proposals slider", type: :system, js: true do
       it "displays the slider and the filters" do
         visit decidim.root_path
 
-        expect(page).to have_content("EXPLORE PROPOSALS")
-        expect(page).to have_css(".filters")
+        expect(page).to have_content("Explore proposals")
+        expect(page).to have_css(".filters_container")
       end
 
       context "when using the filters" do
