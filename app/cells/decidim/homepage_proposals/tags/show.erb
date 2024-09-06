@@ -1,4 +1,4 @@
 <%= content_tag :ul, class: tags_classes, data: { tags: "" } do %>
-  <%= content_tag :li, tag_item(category_name, t("decidim.tags.filter_results_for_category", resource: category_name)) if category? %>
-  <%= content_tag :li, tag_item(scope_name, t("decidim.tags.filter_results_for_scope", resource: scope_name)) if scope? %>
+  <%= content_tag :li, tag_item(category_name, t("decidim.homepage_proposals.tags.category", resource: category_name)) if category? %>
+  <%= content_tag :li, tag_item(scope_name, t("decidim.homepage_proposals.tags.scope", resource: scope_name)) if scope? %>
 <% end %>

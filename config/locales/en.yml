@@ -42,3 +42,6 @@ en:
           description: There are no proposals that match the selected filters.
           title: No proposals
         title: Explore proposals
+      tags:
+        category: 'Category: %{resource}'
+        scope: 'Scope: %{resource}'
