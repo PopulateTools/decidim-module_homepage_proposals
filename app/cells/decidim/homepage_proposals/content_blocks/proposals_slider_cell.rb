@@ -55,6 +55,14 @@ module Decidim
         def selected_component_id
           @selected_component_id ||= params.dig(:filter, :component_id) || content_block_settings.default_linked_component
         end
+
+        def order_config
+          content_block_settings.order.presence || "random"
+        end
+
+        def max_results_config
+          content_block_settings.max_results.presence || 12
+        end
       end
     end
   end

@@ -77,21 +77,37 @@ module Decidim
         scopes = Decidim::Scope.find(params.dig(:filter, :scope_id)) if params.dig(:filter, :scope_id).present?
       end
 
-      @glanced_proposals ||= Decidim::Proposals::Proposal.published
-                                                         .where(component: params.dig(:filter, :component_id))
-                                                         .where(filter_by_scopes(scopes))
-                                                         .select do |proposal|
-                                                           if category.present?
-                                                             proposal.category == category
-                                                           else
-                                                             true
-                                                           end
-                                                         end
-                                                         .sample(12)
+      @glanced_proposals ||= sorted_query(
+        base_query(component: params.dig(:filter, :component_id), category:, scopes:),
+        **filter_config
+      )
+    end
+
+    def base_query(component:, scopes: nil, category: nil)
+      query = Decidim::Proposals::Proposal.published.where(component:).where(filter_by_scopes(scopes))
+      return query.with_category(category) if category.present?
+
+      query
+    end
+
+    def sorted_query(query, order:, max_results:)
+      limit = max_results.to_i
+      case order
+      when "random"
+        query.sample(limit)
+      when "most_recent"
+        query.order(created_at: :desc).limit(limit)
+      when "least_recent"
+        query.order(created_at: :asc).limit(limit)
+      end
     end
 
     def filter_by_scopes(scopes)
       { scope: scopes } if scopes.present?
+    end
+
+    def filter_config
+      @filter_config ||= { "order" => "random", "max_results" => 12 }.merge(params[:filter_config]&.permit(:order, :max_results).to_h).symbolize_keys
     end
 
     def proposal_path(proposal)

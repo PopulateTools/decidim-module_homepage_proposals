@@ -27,13 +27,14 @@ export default class Manager {
         const filterForm = $("form.new_filter")
         const formAction = filterForm.attr("action");
         const params = filterForm.find("select:not(.ignore-filter)").serialize();
+        const config_params = filterForm.find("input[data-filter-config]").serialize();
 
         let path = "";
 
         if (formAction.indexOf("?") < 0) {
-            path = `${formAction}?${params}`;
+            path = `${formAction}?${params}&${config_params}`;
         } else {
-            path = `${formAction}&${params}`;
+            path = `${formAction}&${params}&${config_params}`;
         }
         return path;
     }
