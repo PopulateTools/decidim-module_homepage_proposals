@@ -807,6 +807,7 @@ DEPENDENCIES
   decidim (~> 0.28)
   decidim-dev (~> 0.28)
   decidim-homepage_proposals!
+  deface (>= 1.5)
   faker (~> 3.2)
   letter_opener_web (~> 2.0)
   listen (~> 3.1)
