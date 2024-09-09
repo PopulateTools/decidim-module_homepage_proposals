@@ -3,8 +3,7 @@
     <%= title %>
   </h2>
 </div>
-
-<div class="filters_container" <%= 'style="display: none"' unless content_block_settings.activate_filters %>>
+<div class="filters_container" <%= 'style="display: none"' unless settings.activate_filters %>>
   <%= render partial: "decidim/shared/homepage_proposals/filters" %>
 </div>
 <div id="proposals_slider">

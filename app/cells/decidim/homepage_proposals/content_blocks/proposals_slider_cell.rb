@@ -6,6 +6,8 @@ module Decidim
       class ProposalsSliderCell < Decidim::ContentBlocks::BaseCell
         attr_accessor :glanced_proposals
 
+        delegate :settings, to: :model
+
         include Cell::ViewModel::Partial
         include Core::Engine.routes.url_helpers
         include Decidim::IconHelper
@@ -21,13 +23,6 @@ module Decidim
           root_path
         end
 
-        def content_block_settings
-          @content_block_settings ||= Decidim::ContentBlock.find_by(
-            manifest_name: "proposals_slider",
-            organization: current_organization
-          ).settings
-        end
-
         def options_for_default_component
           options = linked_components.map do |component|
             ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
@@ -37,7 +32,7 @@ module Decidim
         end
 
         def linked_components
-          @linked_components ||= Decidim::Component.where(id: content_block_settings.linked_components_id.compact)
+          @linked_components ||= Decidim::Component.where(id: settings.linked_components_id.compact)
         end
 
         def default_filter_params
@@ -53,19 +48,19 @@ module Decidim
         end
 
         def selected_component_id
-          @selected_component_id ||= params.dig(:filter, :component_id) || content_block_settings.default_linked_component
+          @selected_component_id ||= params.dig(:filter, :component_id) || settings.default_linked_component
         end
 
         def order_config
-          content_block_settings.order.presence || "random"
+          settings.order.presence || "random"
         end
 
         def max_results_config
-          content_block_settings.max_results.presence || 12
+          settings.max_results.presence || 12
         end
 
         def title
-          translated_attribute(content_block_settings.block_title).presence || I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title")
+          translated_attribute(settings.block_title).presence || I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title")
         end
       end
     end
