@@ -11,9 +11,12 @@ import NotFound from "./glideItems/NotFound";
 //
 // @return - Instance of Manager
 export default class Manager {
-    constructor($proposalsSlider, $proposalsGlideItems, $glideBullets, $formFilter) {
+    constructor($proposalsSlider, $proposalsGlideItems, $glideBullets, $formFilter, id) {
         this.$proposalSlider = $proposalsSlider;
         this.$proposalsGlideItems = $proposalsGlideItems;
+        this.$glideBullets = $glideBullets;
+        this.$formFilter = $formFilter;
+        this.sliderId = id;
         this.$loading = this.$proposalSlider.find(".loading");
     }
 
@@ -24,17 +27,17 @@ export default class Manager {
 
     // @return String - Filter params query string
     filterURIParams() {
-        const filterForm = $("form.new_filter")
+        const filterForm = this.$formFilter;
         const formAction = filterForm.attr("action");
         const params = filterForm.find("select:not(.ignore-filter)").serialize();
-        const config_params = filterForm.find("input[data-filter-config]").serialize();
+        const configParams = filterForm.find("input[data-filter-config]").serialize();
 
         let path = "";
 
         if (formAction.indexOf("?") < 0) {
-            path = `${formAction}?${params}&${config_params}`;
+            path = `${formAction}?${params}&${configParams}`;
         } else {
-            path = `${formAction}&${params}&${config_params}`;
+            path = `${formAction}&${params}&${configParams}`;
         }
         return path;
     }
@@ -52,6 +55,10 @@ export default class Manager {
     // @return void
     endLoading() {
         this.$loading.hide();
+    }
+
+    sliderSelector() {
+        return `#proposals-slider-${this.sliderId} .glide`;
     }
 
     // Clears glide items and glide bullets
@@ -83,7 +90,7 @@ export default class Manager {
                 this.generateGlides([])
             })
             .always((res) => {
-                this.glide = new GlideBuilder('.glide', 'carousel', res.length);
+                this.glide = new GlideBuilder(this.sliderSelector(), 'carousel', res.length);
 
                 if (res.length === undefined || res.length <= 1 || res.status === 500) {
                     this.glide.disable()
@@ -112,7 +119,7 @@ export default class Manager {
     createProposalsNotFound(url) {
         const notFoundGlide = new NotFound(url)
         this.$proposalsGlideItems.append(notFoundGlide.render())
-        $(".glide__bullets > .glide__bullet:last").before(notFoundGlide.bullet(0));
+        this.$glideBullets.find(".glide__bullet:last").before(notFoundGlide.bullet(0));
 
         for (let i = 0; i < GlideBuilder.defaultPervView() - 1; i++) {
             this.$proposalsGlideItems.append(notFoundGlide.placeholder());
@@ -126,7 +133,7 @@ export default class Manager {
         for (let i = 0; i < proposals.length; i++) {
             let proposalGlide = new Proposal(proposals[i])
             this.$proposalsGlideItems.append(proposalGlide.render());
-            $(".glide__bullets > .glide__bullet:last").before(proposalGlide.bullet(i));
+            this.$glideBullets.find(".glide__bullet:last").before(proposalGlide.bullet(i));
         }
     }
 }

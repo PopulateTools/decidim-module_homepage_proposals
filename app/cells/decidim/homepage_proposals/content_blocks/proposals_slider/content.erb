@@ -6,13 +6,13 @@
 <div class="filters_container" <%= 'style="display: none"' unless settings.activate_filters %>>
   <%= render partial: "decidim/shared/homepage_proposals/filters" %>
 </div>
-<div id="proposals_slider">
+<div id="<%= "proposals-slider-#{model.id}" %>">
   <div class="glide margin-top-3">
     <div class="column small-12">
       <p class="loading text-center"><%= t("loading", scope: "decidim.homepage_proposals.content_blocks.proposals_slider") %></p>
     </div>
     <div class="glide__track row small-12 column" data-glide-el="track">
-      <ul class="glide__slides" id="proposals_glide_items">
+      <ul class="glide__slides" id="<%= "proposals-glide-items-#{model.id}" %>">
         <%# Content loaded by 'app/packs/src/decidim/homepage_proposals/main.js' %>
       </ul>
     </div>

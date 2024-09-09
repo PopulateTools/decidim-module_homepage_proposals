@@ -62,6 +62,10 @@ module Decidim
         def title
           translated_attribute(settings.block_title).presence || I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title")
         end
+
+        def data
+          { proposals_slider: model.id }
+        end
       end
     end
   end
