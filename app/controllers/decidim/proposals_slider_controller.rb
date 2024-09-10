@@ -6,12 +6,18 @@ module Decidim
     include Decidim::TranslatableAttributes
     include Decidim::Core::Engine.routes.url_helpers
     include Decidim::ComponentPathHelper
+    include Decidim::LayoutHelper
 
+    delegate :asset_pack_path, to: :action_controller_helpers
     def refresh_proposals
       render json: build_proposals_api
     end
 
     private
+
+    def action_controller_helpers
+      ActionController::Base.helpers
+    end
 
     def proposal_state_css_class(proposal)
       return if proposal.state.blank?
@@ -115,9 +121,9 @@ module Decidim
     end
 
     def image_for(proposal)
-      return view_context.image_pack_url("media/images/slider_proposal_image.jpeg") unless proposal.attachments.select(&:image?).any?
+      return external_icon("media/images/placeholder-card-g.svg", class: "card__placeholder-g").to_s unless proposal.attachments.select(&:image?).any?
 
-      proposal.attachments.select(&:image?).first&.url
+      image_tag(proposal.attachments.select(&:image?).first&.url, class: "card__grid-img")
     end
 
     def component_url

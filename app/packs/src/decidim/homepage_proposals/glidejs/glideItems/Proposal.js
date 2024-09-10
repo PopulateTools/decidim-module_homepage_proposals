@@ -22,7 +22,7 @@ export default class Proposal extends GlideItem {
     render() {
         return `<a href="${this.url}" class="card__grid glide__slide">
       <div class="card__grid-img">
-        <img src="${this.image}" class="card__grid-img" alt="slider_img">
+        ${this.image}
       </div>
       <div class="card__grid-text">
         <div class="card__list-metadata">
