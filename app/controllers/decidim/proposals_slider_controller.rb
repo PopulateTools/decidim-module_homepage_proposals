@@ -90,7 +90,7 @@ module Decidim
     end
 
     def base_query(component:, scopes: nil, category: nil)
-      query = Decidim::Proposals::Proposal.published.where(component:).where(filter_by_scopes(scopes))
+      query = Decidim::Proposals::Proposal.not_rejected.not_withdrawn.published.where(component:).where(filter_by_scopes(scopes))
       return query.with_category(category) if category.present?
 
       query
