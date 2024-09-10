@@ -1,0 +1,44 @@
+---
+es:
+  decidim:
+    homepage_proposals:
+      content_blocks:
+        proposals_slider:
+          filters_small_view:
+            close_modal: Cerrar modal
+            filter: Filtra
+            filter_by: Filtra por
+            unfold: Sin definir
+          learn_more: Más
+          loading: Cargando...
+          name: Slider de propuestas
+          search: Busca
+        proposals_slider_settings_form:
+          activate_filters: Activa filtros
+          block_title: Titulo del bloque
+          default_linked_component: Componente mostrado por defecto
+          linked_components_id: Componentes disponibles en el filtro
+          max_results: Número máximo de elementos a mostrar
+          order: Ordena elementos por
+          show:
+            least_recent: Menos reciente
+            most_recent: Más reciente
+            random: Aleatorio
+      proposal_at_a_glance:
+        filters:
+          about: sobre
+          all_proposals: Ver todo
+          categories: Categorías
+          clear_filters: Borra los filtros
+          components: Componentes
+          default_categories: Todas las categorías
+          default_components: Todos los componentes
+          default_scope: Ver todos los ámbitos
+          in: en
+          intro: Ver contenidos de
+          scope: Ámbito
+        learn_more: Más
+        no_proposals:
+          description: No hay elementos para mostrar con los criterios seleccionados.
+          title: Sin elementos
+        title: Explora

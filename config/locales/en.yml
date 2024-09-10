@@ -9,7 +9,7 @@ en:
             filter: Filter
             filter_by: Filter by
             unfold: Unfold
-          learn_more: Learn more
+          learn_more: View more
           loading: Loading...
           name: Proposals slider
           search: Search
@@ -27,7 +27,7 @@ en:
       proposal_at_a_glance:
         filters:
           about: about
-          all_proposals: All proposals
+          all_proposals: View all
           categories: Categories
           clear_filters: Clear filters
           components: Components
@@ -35,10 +35,10 @@ en:
           default_components: All components
           default_scope: All scopes
           in: in
-          intro: I'd like to see projects from
+          intro: I'd like to see elements from
           scope: Scope
-        learn_more: Learn more
+        learn_more: View more
         no_proposals:
-          description: There are no proposals that match the selected filters.
-          title: No proposals
-        title: Explore proposals
+          description: There are no elements that match the selected filters.
+          title: No elements
+        title: Explore

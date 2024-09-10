@@ -1,0 +1,44 @@
+---
+ca:
+  decidim:
+    homepage_proposals:
+      content_blocks:
+        proposals_slider:
+          filters_small_view:
+            close_modal: Tancar modal
+            filter: Filtra
+            filter_by: Filtra per
+            unfold: Sense definir
+          learn_more: Més
+          loading: Carregant...
+          name: Slider de propostes
+          search: Cerca
+        proposals_slider_settings_form:
+          activate_filters: Activa filtres
+          block_title: Titol del bloc
+          default_linked_component: Component mostrat per defecte
+          linked_components_id: Components disponibles al filtre
+          max_results: Nombre màxim d'elements a mostrar
+          order: Ordena elements per
+          show:
+            least_recent: Menys recent
+            most_recent: Més recent
+            random: Aleatori
+      proposal_at_a_glance:
+        filters:
+          about: sobre
+          all_proposals: Veure tot
+          categories: Categories
+          clear_filters: Esborra els filtres
+          components: Components
+          default_categories: Totes les categories
+          default_components: Tots els components
+          default_scope: Veure tots els àmbits
+          in: a
+          intro: Veure contringuts de
+          scope: Àmbit
+        learn_more: Més
+        no_proposals:
+          description: No hi ha elements per mostrar amb els criteris escollits.
+          title: Sense elements
+        title: Explora
