@@ -28,7 +28,7 @@ module Decidim
         end
 
         def proposals_components
-          @proposals_components ||= Decidim::Component.where(manifest_name: "proposals").published
+          @proposals_components ||= Decidim::PublicComponents.for(content_block.organization, manifest_name: "proposals")
         end
 
         def order_options
