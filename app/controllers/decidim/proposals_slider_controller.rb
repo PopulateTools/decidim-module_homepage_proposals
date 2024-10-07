@@ -69,7 +69,7 @@ module Decidim
         {
           id: proposal.id,
           title: translated_attribute(proposal.title).truncate(40),
-          body: translated_attribute(proposal.body).truncate(150),
+          body: Decidim::Proposals::ProposalPresenter.new(proposal).body(strip_tags: true).truncate(150),
           url: proposal_path(proposal),
           image: image_for(proposal),
           tags: proposal.category ? cell("decidim/homepage_proposals/tags", proposal).to_s.strip.html_safe : ""
