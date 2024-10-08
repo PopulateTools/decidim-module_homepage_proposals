@@ -52,7 +52,7 @@ export default class GlideBuilder {
     bindings() {
     this.glide.on("run", () => {
             let bulletNumber = this.glide.index;
-            let $glideBullets = $(".glide__bullets");
+            let $glideBullets = $(this.glide.selector).find(".glide__bullets");
 
             $($glideBullets.children()).css("color", "lightgrey");
             $($glideBullets.children().get(bulletNumber + 1)).css("color", "grey");
