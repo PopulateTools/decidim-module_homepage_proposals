@@ -13,24 +13,12 @@ export default class GlideBuilder {
 
     constructor(selector = '.glide', type = 'carousel', pervView = GlideBuilder.defaultPervView()) {
         this.type = type
-        this.pervView = this.setPervView(pervView);
+        this.pervView = pervView;
         this.breakpoints = this.setBreakpoints();
         this.setOpts()
         this.glide = new Glide(selector, this.options)
 
         this.bindings()
-    }
-
-    // Set pervView, must be between 0 and 4 excluded
-    // Returns default pervView when :
-    // * pervView < 1 : Placeholder is added at ./glideItems/Manager.js:122
-    // * pervView > 4 : Max pervView must be 4
-    setPervView(pervView) {
-        if (pervView > 0 && pervView < 4) {
-            return pervView;
-        } else {
-            return GlideBuilder.defaultPervView();
-        }
     }
 
     // Glide breakpoints must be accorded to the pervView to prevent scrolling on placeholders

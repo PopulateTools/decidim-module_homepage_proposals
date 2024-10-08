@@ -90,7 +90,7 @@ export default class Manager {
                 this.generateGlides([])
             })
             .always((res) => {
-                this.glide = new GlideBuilder(this.sliderSelector(), 'carousel', res.length);
+                this.glide = new GlideBuilder(this.sliderSelector(), 'slider');
 
                 if (res.length === undefined || res.length <= 1 || res.status === 500) {
                     this.glide.disable()
