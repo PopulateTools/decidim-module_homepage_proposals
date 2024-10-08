@@ -123,7 +123,7 @@ module Decidim
     def image_for(proposal)
       return external_icon("media/images/placeholder-card-g.svg", class: "card__placeholder-g").to_s unless proposal.attachments.select(&:image?).any?
 
-      image_tag(proposal.attachments.select(&:image?).first&.url, class: "card__grid-img")
+      ActionController::Base.helpers.image_tag(proposal.attachments.select(&:image?).first&.url, class: "card__grid-img")
     end
 
     def component_url
