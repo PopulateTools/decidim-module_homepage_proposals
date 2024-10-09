@@ -90,7 +90,8 @@ export default class Manager {
                 this.generateGlides([])
             })
             .always((res) => {
-                this.glide = new GlideBuilder(this.sliderSelector(), 'slider');
+                // Use an infinite carousel if there are enough elements to fill pervView
+                this.glide = new GlideBuilder(this.sliderSelector(), res.length >= GlideBuilder.defaultPervView() ? 'carousel' : 'slider');
 
                 if (res.length === undefined || res.length <= 1 || res.status === 500) {
                     this.glide.disable()
