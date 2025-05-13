@@ -28,7 +28,11 @@ module Decidim
         end
 
         def proposals_components
-          @proposals_components ||= Decidim::PublicComponents.for(content_block.organization, manifest_name: "proposals")
+          @proposals_components ||= if public_proposals.exists?
+                                      Decidim::Component.where(id: public_proposals.select(:decidim_component_id).distinct)
+                                    else
+                                      Decidim::PublicComponents.for(content_block.organization, manifest_name: "proposals")
+                                    end
         end
 
         def order_options
@@ -37,6 +41,14 @@ module Decidim
             [I18n.t("least_recent", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show"), "least_recent"],
             [I18n.t("random", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show"), "random"]
           ]
+        end
+
+        private
+
+        def public_proposals
+          @public_proposals ||= Decidim::Proposals::FilteredProposals.for(
+            Decidim::PublicComponents.for(content_block.organization, manifest_name: "proposals")
+          ).not_status(:rejected).not_withdrawn.published
         end
       end
     end
