@@ -20,6 +20,7 @@ en:
           linked_components_id: Components available in filters
           max_results: Maximum amount of elements to show
           order: Order elements by
+          select_components: Select components
           show:
             least_recent: Least recent
             most_recent: Most recent
