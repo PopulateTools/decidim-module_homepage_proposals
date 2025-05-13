@@ -43,6 +43,10 @@ module Decidim
           ]
         end
 
+        def content_block_name_attribute
+          :block_title
+        end
+
         private
 
         def public_proposals
