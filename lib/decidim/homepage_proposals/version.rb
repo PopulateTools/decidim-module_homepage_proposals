@@ -3,11 +3,11 @@
 module Decidim
   module HomepageProposals
     def self.version
-      "3.0.0"
+      "3.1.0"
     end
 
     def self.decidim_version
-      "0.28"
+      "0.29"
     end
   end
 end
