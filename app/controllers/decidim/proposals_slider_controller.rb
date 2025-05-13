@@ -7,6 +7,7 @@ module Decidim
     include Decidim::Core::Engine.routes.url_helpers
     include Decidim::ComponentPathHelper
     include Decidim::LayoutHelper
+    include Decidim::Proposals::ApplicationHelper
 
     delegate :asset_pack_path, to: :action_controller_helpers
     def refresh_proposals
@@ -19,23 +20,6 @@ module Decidim
       ActionController::Base.helpers
     end
 
-    def proposal_state_css_class(proposal)
-      return if proposal.state.blank?
-      return proposal.proposal_state&.css_class if proposal.respond_to?(:proposal_state) && !roposal.emendation?
-      return "info" unless proposal.published_state?
-
-      case proposal.state
-      when "accepted"
-        "success"
-      when "rejected", "withdrawn"
-        "alert"
-      when "evaluating"
-        "warning"
-      else
-        "info"
-      end
-    end
-
     def proposal_complete_state(proposal)
       return humanize_proposal_state(proposal.state) unless proposal.respond_to?(:proposal_state)
       return humanize_proposal_state("not_answered").html_safe if proposal.proposal_state.nil?
@@ -44,21 +28,11 @@ module Decidim
       translated_attribute(proposal&.proposal_state&.title)
     end
 
-    def humanize_proposal_state(state)
-      I18n.t(state, scope: "decidim.proposals.answers", default: :not_answered)
-    end
-
     def state_settings(proposal)
-      state_18n = if Decidim.module_installed?(:custom_proposal_states) || proposal.respond_to?(:proposal_state)
-                    proposal_complete_state(proposal)
-                  else
-                    humanize_proposal_state(proposal.state)
-                   end
-
       {
-        state: proposal.state,
+        state_i18n: proposal_complete_state(proposal),
         state_css_class: proposal_state_css_class(proposal),
-        state_i18n: state_18n
+        state_css_style: proposal_state_css_style(proposal)
       }
     end
 

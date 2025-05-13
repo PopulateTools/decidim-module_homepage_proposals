@@ -7,9 +7,9 @@ export default class Proposal extends GlideItem {
         this.body = obj.body;
         this.image = obj.image;
         this.url = obj.url;
-        this.state = obj.state || 'not answered' ;
         this.stateI18n = obj.state_i18n;
         this.color = obj.state_css_class;
+        this.style = obj.state_css_style;
         this.tags = obj.tags;
     }
 
@@ -26,7 +26,7 @@ export default class Proposal extends GlideItem {
       </div>
       <div class="card__grid-text">
         <div class="card__list-metadata">
-          <span class="label ${this.color}"> ${this.stateI18n} </span>
+          <span class="label ${this.color}" style="${this.style}"> ${this.stateI18n} </span>
         </div>
         <h3 class="h4 text-secondary">${this.title}</h3>
 
