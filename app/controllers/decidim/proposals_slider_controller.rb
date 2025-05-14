@@ -14,6 +14,12 @@ module Decidim
       render json: build_proposals_api
     end
 
+    def filters
+      @content_block = Decidim::ContentBlock.find params[:filter_config][:content_block]
+
+      render layout: false
+    end
+
     private
 
     def action_controller_helpers
