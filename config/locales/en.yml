@@ -25,6 +25,8 @@ en:
             least_recent: Least recent
             most_recent: Most recent
             random: Random
+          view_all_text: View all link text
+          view_all_url: View all link URL
       proposal_at_a_glance:
         filters:
           about: about

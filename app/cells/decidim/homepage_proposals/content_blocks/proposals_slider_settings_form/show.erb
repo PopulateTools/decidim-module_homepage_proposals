@@ -37,4 +37,12 @@
   <div class="row column">
     <%= settings_fields.translated :text_field, :block_title, label: t(".block_title") %>
   </div>
+
+  <div class="row column">
+    <%= settings_fields.translated :text_field, :view_all_text, label: t(".view_all_text") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.text_field :view_all_url, label: t(".view_all_url") %>
+  </div>
 <% end %>

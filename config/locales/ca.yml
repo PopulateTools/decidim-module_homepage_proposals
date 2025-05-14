@@ -25,6 +25,8 @@ ca:
             least_recent: Menys recent
             most_recent: Més recent
             random: Aleatori
+          view_all_text: Text de lenllaç de veure tot
+          view_all_url: URL de lenllaç de veure tot
       proposal_at_a_glance:
         filters:
           about: sobre

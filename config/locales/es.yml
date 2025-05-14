@@ -25,6 +25,8 @@ es:
             least_recent: Menos reciente
             most_recent: Más reciente
             random: Aleatorio
+          view_all_text: Texto del enlace de ver todo
+          view_all_url: URL del enlace de ver todo
       proposal_at_a_glance:
         filters:
           about: sobre

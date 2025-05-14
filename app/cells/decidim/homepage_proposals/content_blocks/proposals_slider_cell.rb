@@ -59,6 +59,18 @@ module Decidim
           settings.max_results.presence || 12
         end
 
+        def view_all_text_config
+          translated_attribute(settings.view_all_text).presence || I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.all_proposals")
+        end
+
+        def view_all_url_config
+          return default_linked_component_path if settings.view_all_url.blank?
+
+          URI.parse(settings.view_all_url).to_s
+        rescue URI::InvalidURIError
+          default_linked_component_path
+        end
+
         def title
           translated_attribute(settings.block_title).presence || I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title")
         end
