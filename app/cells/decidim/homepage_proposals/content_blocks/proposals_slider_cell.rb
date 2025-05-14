@@ -47,6 +47,10 @@ module Decidim
           @categories_filter ||= Decidim::Category.where(id: available_categories_ids)
         end
 
+        def filters
+          render :filters
+        end
+
         def selected_component_id
           @selected_component_id ||= params.dig(:filter, :component_id) || settings.default_linked_component
         end
