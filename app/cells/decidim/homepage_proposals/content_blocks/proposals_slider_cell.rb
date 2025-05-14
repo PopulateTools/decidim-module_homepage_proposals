@@ -44,11 +44,21 @@ module Decidim
         end
 
         def categories_filter
-          @categories_filter ||= Decidim::Category.where(id: linked_components.map(&:categories).flatten)
+          @categories_filter ||= Decidim::Category.where(id: available_categories_ids)
         end
 
         def selected_component_id
           @selected_component_id ||= params.dig(:filter, :component_id) || settings.default_linked_component
+        end
+
+        def selected_category_id
+          params.dig(:filter, :category_id)&.to_i
+        end
+
+        def available_categories_ids
+          categories_ids = base_proposals_relation.joins(:category).select("decidim_categorizations.decidim_category_id").distinct.map(&:decidim_category_id)
+          categories_ids << selected_category_id if selected_category_id.present? && categories_ids.exclude?(selected_category_id)
+          categories_ids
         end
 
         def order_config
@@ -77,6 +87,10 @@ module Decidim
 
         def data
           { proposals_slider: model.id }
+        end
+
+        def base_proposals_relation
+          Decidim::Proposals::Proposal.not_status(:rejected).not_withdrawn.published.where(component: selected_component_id)
         end
       end
     end
