@@ -25,6 +25,10 @@ export default class Manager {
         return '/proposals_slider/refresh_proposals' + this.filterURIParams();
     }
 
+    FilterUrl() {
+        return 'proposals_slider/filters' + this.filterURIParams();
+    }
+
     // @return String - Filter params query string
     filterURIParams() {
         const filterForm = this.$formFilter;

@@ -16,7 +16,19 @@ $("[data-proposals-slider]").each((_i, elem) => {
     slider.start()
 
     // Refresh slider when Desktop filter form changes
-    $filterForm.on("change", () => {
-        slider.start()
+    $filterForm.on("change", (event) => {
+        slider.start();
+
+        $.get(slider.FilterUrl())
+            .done((res) => {
+                const div = document.createElement("div");
+                const filtersContainer = slider.$formFilter.find("[data-filters-container]")
+
+                div.innerHTML = res;
+                const filtersContainerReplacement = div.querySelector("[data-filters-container]");
+                filtersContainer.replaceWith(filtersContainerReplacement)
+
+                div.remove();
+            });
     });
 });

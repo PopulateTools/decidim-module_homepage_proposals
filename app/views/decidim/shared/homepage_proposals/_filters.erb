@@ -1,5 +1,5 @@
 <%= filter_form_for(filter, decidim_participatory_processes_path, id: "filters-form-#{model.id}") do |form| %>
-  <div class="row">
+  <div class="row" data-filters-container>
     <div class="columns flex-v-center">
       <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></p>
       <% if ordered_scopes_descendants_for_select.present? %>
