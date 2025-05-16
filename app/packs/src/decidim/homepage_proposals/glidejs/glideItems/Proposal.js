@@ -11,6 +11,9 @@ export default class Proposal extends GlideItem {
         this.color = obj.state_css_class;
         this.style = obj.state_css_style;
         this.tags = obj.tags;
+        this.displayState = obj.display_state;
+        this.displayDescription = obj.display_description;
+        this.displayImage = obj.display_image;
     }
 
     getTagsTemplate() {
@@ -21,20 +24,45 @@ export default class Proposal extends GlideItem {
 
     render() {
         return `<a href="${this.url}" class="card__grid glide__slide">
-      <div class="card__grid-img">
-        ${this.image}
-      </div>
+      ${this.imagePartial()}
       <div class="card__grid-text">
-        <div class="card__list-metadata">
-          <span class="label ${this.color}" style="${this.style}"> ${this.stateI18n} </span>
-        </div>
-        <h3 class="h4 text-secondary">${this.title}</h3>
-
-          ${this.getTagsTemplate()}
-        <p>${this.body}</p>
-
+        ${this.statePartial()}
+        ${this.titlePartial()}
+        ${this.getTagsTemplate()}
+        ${this.descriptionPartial()}
       </div>
     </a>`
+    }
+
+    titlePartial() {
+        return `<h3 class="h4 text-secondary">${this.title}</h3>`;
+    }
+    imagePartial() {
+        if (this.displayImage) {
+            return `<div class="card__grid-img">
+        ${this.image}
+      </div>`;
+        } else {
+            return "";
+        }
+    }
+
+    descriptionPartial() {
+        if (this.displayDescription) {
+            return `<p>${this.body}</p>`;
+        } else {
+            return "";
+        }
+    }
+
+    statePartial() {
+        if (this.displayState) {
+            return `<div class="card__list-metadata">
+          <span class="label ${this.color}" style="${this.style}"> ${this.stateI18n} </span>
+        </div>`
+        } else {
+            return "";
+        }
     }
 
 }

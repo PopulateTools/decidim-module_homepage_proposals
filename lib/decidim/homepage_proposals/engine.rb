@@ -38,6 +38,9 @@ module Decidim
             settings.attribute :block_title, type: :text, translated: true, preview: -> { I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title") }
             settings.attribute :view_all_text, type: :text, translated: true
             settings.attribute :view_all_url, type: :text
+            settings.attribute :display_proposals_state, type: :boolean, default: true
+            settings.attribute :display_proposals_description, type: :boolean, default: true
+            settings.attribute :display_proposals_image, type: :boolean, default: true
           end
         end
       end

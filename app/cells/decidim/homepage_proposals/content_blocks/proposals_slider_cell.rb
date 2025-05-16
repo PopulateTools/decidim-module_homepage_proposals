@@ -85,6 +85,14 @@ module Decidim
           default_linked_component_path
         end
 
+        def display_config
+          @display_config ||= {
+            state: settings.display_proposals_state,
+            description: settings.display_proposals_description,
+            image: settings.display_proposals_image
+          }
+        end
+
         def title
           translated_attribute(settings.block_title).presence || I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title")
         end

@@ -17,6 +17,9 @@ en:
           activate_filters: Activate filters
           block_title: Block title
           default_linked_component: Component displayed by default
+          display_proposals_description: Display proposals description
+          display_proposals_image: Display proposals image
+          display_proposals_state: Display proposals state
           linked_components_id: Components available in filters
           max_results: Maximum amount of elements to show
           order: Order elements by

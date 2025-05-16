@@ -45,4 +45,16 @@
   <div class="row column">
     <%= settings_fields.text_field :view_all_url, label: t(".view_all_url") %>
   </div>
+
+  <div class="row column">
+    <%= settings_fields.check_box :display_proposals_state, label: t(".display_proposals_state") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.check_box :display_proposals_description, label: t(".display_proposals_description") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.check_box :display_proposals_image, label: t(".display_proposals_image") %>
+  </div>
 <% end %>

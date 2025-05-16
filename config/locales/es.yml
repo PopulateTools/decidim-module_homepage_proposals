@@ -17,6 +17,9 @@ es:
           activate_filters: Activa filtros
           block_title: Titulo del bloque
           default_linked_component: Componente mostrado por defecto
+          display_proposals_description: Mostrar descripción de las propuestas
+          display_proposals_image: Mostrar imagen de las propuestas
+          display_proposals_state: Mostrar estado de las propuestas
           linked_components_id: Componentes disponibles en el filtro
           max_results: Número máximo de elementos a mostrar
           order: Ordena elementos por
