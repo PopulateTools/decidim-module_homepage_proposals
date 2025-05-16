@@ -3,17 +3,23 @@ import GlideItem from "./GlideItem";
 export default class Proposal extends GlideItem {
     constructor(obj) {
         super();
+        this.displayBody = obj.hasOwnProperty("body");
+        this.displayImage = obj.hasOwnProperty("image");
+        this.displayState = obj.hasOwnProperty("state_i18n");
         this.title = obj.title;
-        this.body = obj.body;
-        this.image = obj.image;
+        if (this.displayBody) {
+            this.body = obj.body;
+        }
+        if (this.displayImage) {
+            this.image = obj.image;
+        }
         this.url = obj.url;
-        this.stateI18n = obj.state_i18n;
-        this.color = obj.state_css_class;
-        this.style = obj.state_css_style;
+        if (this.displayState) {
+            this.stateI18n = obj.state_i18n;
+            this.color = obj.state_css_class;
+            this.style = obj.state_css_style;
+        }
         this.tags = obj.tags;
-        this.displayState = obj.display_state;
-        this.displayBody = obj.display_body;
-        this.displayImage = obj.display_image;
     }
 
     getTagsTemplate() {

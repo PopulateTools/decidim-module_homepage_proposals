@@ -29,29 +29,19 @@ export default class Manager {
         return 'proposals_slider/filters' + this.filterURIParams();
     }
 
-    displayParam(name) {
-        const field = this.$formFilter.find("input[data-display-config]").filter(`#filter_config_${name}`)
-
-        if (field.length > 0) {
-            return field[0].value === "true";
-        }
-        return false;
-    }
-
     // @return String - Filter params query string
     filterURIParams() {
         const filterForm = this.$formFilter;
         const formAction = filterForm.attr("action");
         const params = filterForm.find("select:not(.ignore-filter)").serialize();
         const configParams = filterForm.find("input[data-filter-config]").serialize();
-        const displayParams = filterForm.find("input[data-display-config]").serialize();
 
         let path = "";
 
         if (formAction.indexOf("?") < 0) {
-            path = `${formAction}?${params}&${configParams}&${displayParams}`;
+            path = `${formAction}?${params}&${configParams}`;
         } else {
-            path = `${formAction}&${params}&${configParams}&${displayParams}`;
+            path = `${formAction}&${params}&${configParams}`;
         }
         return path;
     }
@@ -146,9 +136,6 @@ export default class Manager {
     // @return void
     createProposals(proposals) {
         for (let i = 0; i < proposals.length; i++) {
-            proposals[i]["display_state"] = this.displayParam("state");
-            proposals[i]["display_body"] = this.displayParam("body");
-            proposals[i]["display_image"] = this.displayParam("image");
 
             let proposalGlide = new Proposal(proposals[i])
             this.$proposalsGlideItems.append(proposalGlide.render());

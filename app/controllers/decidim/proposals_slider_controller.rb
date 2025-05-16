@@ -47,15 +47,23 @@ module Decidim
     def build_proposals_api
       return component_url unless glanced_proposals.any?
 
+      display_body = content_block&.settings.present? ? content_block.settings.display_proposals_body : true
+      display_image = content_block&.settings.present? ? content_block.settings.display_proposals_image : true
+      display_state = content_block&.settings.present? ? content_block.settings.display_proposals_state : true
+
       glanced_proposals.flat_map do |proposal|
-        {
+        data =  {
           id: proposal.id,
           title: title_for(proposal),
-          body: body_for(proposal),
           url: proposal_path(proposal),
-          image: image_for(proposal),
           tags: proposal.category ? cell("decidim/homepage_proposals/tags", proposal).to_s.strip.html_safe : ""
-        }.merge(state_settings(proposal))
+        }
+
+        data.merge!(body: body_for(proposal)) if display_body
+        data.merge!(image: image_for(proposal)) if display_image
+        data.merge!(state_settings(proposal)) if display_state
+
+        data
       end
     end
 
