@@ -47,6 +47,14 @@
   </div>
 
   <div class="row column">
+    <%= settings_fields.number_field :max_length_of_title, label: t(".max_length_of_title") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.number_field :max_length_of_body, label: t(".max_length_of_body") %>
+  </div>
+
+  <div class="row column">
     <%= settings_fields.check_box :display_proposals_state, label: t(".display_proposals_state") %>
   </div>
 

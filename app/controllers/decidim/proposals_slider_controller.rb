@@ -10,13 +10,15 @@ module Decidim
     include Decidim::Proposals::ApplicationHelper
 
     delegate :asset_pack_path, to: :action_controller_helpers
+    attr_reader :content_block
+
+    before_action :set_content_block
+
     def refresh_proposals
       render json: build_proposals_api
     end
 
     def filters
-      @content_block = Decidim::ContentBlock.find params[:filter_config][:content_block]
-
       render layout: false
     end
 
@@ -48,8 +50,8 @@ module Decidim
       glanced_proposals.flat_map do |proposal|
         {
           id: proposal.id,
-          title: translated_attribute(proposal.title).truncate(40),
-          body: Decidim::Proposals::ProposalPresenter.new(proposal).body(strip_tags: true).truncate(150),
+          title: title_for(proposal),
+          body: body_for(proposal),
           url: proposal_path(proposal),
           image: image_for(proposal),
           tags: proposal.category ? cell("decidim/homepage_proposals/tags", proposal).to_s.strip.html_safe : ""
@@ -104,6 +106,32 @@ module Decidim
       return external_icon("media/images/placeholder-card-g.svg", class: "card__placeholder-g").to_s unless proposal.attachments.select(&:image?).any?
 
       ActionController::Base.helpers.image_tag(proposal.attachments.select(&:image?).first&.url, class: "card__grid-img")
+    end
+
+    def title_for(proposal)
+      title = translated_attribute(proposal.title)
+      return title if title_max_length.zero?
+
+      title.truncate(title_max_length)
+    end
+
+    def body_for(proposal)
+      body = Decidim::Proposals::ProposalPresenter.new(proposal).body(strip_tags: true)
+      return body if body_max_length.zero?
+
+      body.truncate(body_max_length)
+    end
+
+    def set_content_block
+      @content_block = Decidim::ContentBlock.find_by(id: params[:filter_config][:content_block])
+    end
+
+    def title_max_length
+      @title_max_length ||= content_block&.settings&.max_length_of_title&.positive? ? content_block.settings.max_length_of_title : 0
+    end
+
+    def body_max_length
+      @body_max_length ||= content_block&.settings&.max_length_of_body&.positive? ? content_block.settings.max_length_of_body : 0
     end
 
     def component_url

@@ -21,6 +21,8 @@ es:
           display_proposals_image: Mostrar imagen de las propuestas
           display_proposals_state: Mostrar estado de las propuestas
           linked_components_id: Componentes disponibles en el filtro
+          max_length_of_body: Máximos caracteres del cuerpo (0 para no truncar)
+          max_length_of_title: Máximos caracteres del título (0 para no truncar)
           max_results: Número máximo de elementos a mostrar
           order: Ordena elementos por
           select_components: Selecciona componentes

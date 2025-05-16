@@ -41,6 +41,8 @@ module Decidim
             settings.attribute :display_proposals_state, type: :boolean, default: true
             settings.attribute :display_proposals_description, type: :boolean, default: true
             settings.attribute :display_proposals_image, type: :boolean, default: true
+            settings.attribute :max_length_of_body, type: :integer, default: 150
+            settings.attribute :max_length_of_title, type: :integer, default: 40
           end
         end
       end

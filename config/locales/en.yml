@@ -21,6 +21,8 @@ en:
           display_proposals_image: Display proposals image
           display_proposals_state: Display proposals state
           linked_components_id: Components available in filters
+          max_length_of_body: Maximumn characters of body (0 to not truncate)
+          max_length_of_title: Maximumn characters of title (0 to not truncate)
           max_results: Maximum amount of elements to show
           order: Order elements by
           select_components: Select components
