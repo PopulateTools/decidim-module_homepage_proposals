@@ -43,7 +43,7 @@ es:
           default_components: Todos los componentes
           default_scope: Ver todos los ámbitos
           in: en
-          intro: Ver contenidos de
+          intro: Ver contenidos
           scope: Ámbito
         learn_more: Más
         no_proposals:

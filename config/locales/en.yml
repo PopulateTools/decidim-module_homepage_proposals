@@ -43,7 +43,7 @@ en:
           default_components: All components
           default_scope: All scopes
           in: in
-          intro: I'd like to see elements from
+          intro: I'd like to see elements
           scope: Scope
         learn_more: View more
         no_proposals:

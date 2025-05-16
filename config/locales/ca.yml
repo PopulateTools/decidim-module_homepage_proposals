@@ -43,7 +43,7 @@ ca:
           default_components: Tots els components
           default_scope: Veure tots els àmbits
           in: a
-          intro: Veure contringuts de
+          intro: Veure contringuts
           scope: Àmbit
         learn_more: Més
         no_proposals:
