@@ -88,7 +88,7 @@ module Decidim
         def display_config
           @display_config ||= {
             state: settings.display_proposals_state,
-            description: settings.display_proposals_description,
+            body: settings.display_proposals_body,
             image: settings.display_proposals_image
           }
         end

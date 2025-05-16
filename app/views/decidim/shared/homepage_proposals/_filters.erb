@@ -42,6 +42,6 @@
   <%= hidden_field_tag("filter_config[max_results]", max_results_config, data: { filter_config: "" }) %>
   <%= hidden_field_tag("filter_config[content_block]", data[:proposals_slider], data: { filter_config: "" }) %>
   <%= hidden_field_tag("filter_config[state]", display_config[:state] , data: { display_config: "" }) %>
-  <%= hidden_field_tag("filter_config[description]", display_config[:description], data: { display_config: "" }) %>
+  <%= hidden_field_tag("filter_config[body]", display_config[:body], data: { display_config: "" }) %>
   <%= hidden_field_tag("filter_config[image]", display_config[:image], data: { display_config: "" }) %>
 <% end %>

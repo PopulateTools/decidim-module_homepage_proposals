@@ -147,7 +147,7 @@ export default class Manager {
     createProposals(proposals) {
         for (let i = 0; i < proposals.length; i++) {
             proposals[i]["display_state"] = this.displayParam("state");
-            proposals[i]["display_description"] = this.displayParam("description");
+            proposals[i]["display_body"] = this.displayParam("body");
             proposals[i]["display_image"] = this.displayParam("image");
 
             let proposalGlide = new Proposal(proposals[i])

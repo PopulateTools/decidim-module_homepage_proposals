@@ -12,7 +12,7 @@ export default class Proposal extends GlideItem {
         this.style = obj.state_css_style;
         this.tags = obj.tags;
         this.displayState = obj.display_state;
-        this.displayDescription = obj.display_description;
+        this.displayBody = obj.display_body;
         this.displayImage = obj.display_image;
     }
 
@@ -29,7 +29,7 @@ export default class Proposal extends GlideItem {
         ${this.statePartial()}
         ${this.titlePartial()}
         ${this.getTagsTemplate()}
-        ${this.descriptionPartial()}
+        ${this.bodyPartial()}
       </div>
     </a>`
     }
@@ -47,8 +47,8 @@ export default class Proposal extends GlideItem {
         }
     }
 
-    descriptionPartial() {
-        if (this.displayDescription) {
+    bodyPartial() {
+        if (this.displayBody) {
             return `<p>${this.body}</p>`;
         } else {
             return "";
