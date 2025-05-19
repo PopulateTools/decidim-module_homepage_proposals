@@ -68,14 +68,14 @@ module Decidim
     end
 
     def glanced_proposals
-      if params[:filter].present?
-        category = Decidim::Category.find(params.dig(:filter, :category_id)) if params.dig(:filter, :category_id).present?
-        scopes = Decidim::Scope.find(params.dig(:filter, :scope_id)) if params.dig(:filter, :scope_id).present?
+      if filter_params.present?
+        category = Decidim::Category.find(filter_params[:category_id]) if filter_params[:category_id].present?
+        scopes = Decidim::Scope.find(filter_params[:scope_id]) if filter_params[:scope_id].present?
       end
 
       @glanced_proposals ||= sorted_query(
-        base_query(component: params.dig(:filter, :component_id), category:, scopes:),
-        **filter_config
+        base_query(component: components_ids, category:, scopes:),
+        **filter_config.except(:content_block)
       )
     end
 
@@ -103,7 +103,7 @@ module Decidim
     end
 
     def filter_config
-      @filter_config ||= { "order" => "random", "max_results" => 12 }.merge(params[:filter_config]&.permit(:order, :max_results).to_h).symbolize_keys
+      @filter_config ||= { "order" => "random", "max_results" => 12 }.merge(params[:filter_config]&.permit(:order, :max_results, :content_block).to_h).symbolize_keys
     end
 
     def proposal_path(proposal)
@@ -131,7 +131,7 @@ module Decidim
     end
 
     def set_content_block
-      @content_block = Decidim::ContentBlock.find_by(id: params[:filter_config][:content_block])
+      @content_block = Decidim::ContentBlock.find_by(id: filter_config[:content_block])
     end
 
     def title_max_length
@@ -150,6 +150,14 @@ module Decidim
       rescue ActiveRecord::RecordNotFound
         { url: "/" }
       end
+    end
+
+    def components_ids
+      @components_ids ||= filter_params[:component_id] || content_block.settings.linked_components_id&.compact_blank
+    end
+
+    def filter_params
+      @filter_params ||= params[:filter].present? ? params.require(:filter).permit(:component_id, :content_block, :category_id, :scope_id) : {}
     end
   end
 end
