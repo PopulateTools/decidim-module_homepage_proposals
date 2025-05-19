@@ -5,6 +5,7 @@ module Decidim
     module ContentBlocks
       class ProposalsSliderSettingsFormCell < Decidim::ViewModel
         include ActionView::Helpers::FormOptionsHelper
+        include Decidim::ContentBlocks::HasRelatedComponents
 
         alias form model
 
@@ -29,9 +30,9 @@ module Decidim
 
         def proposals_components
           @proposals_components ||= if public_proposals.exists?
-                                      Decidim::Component.where(id: public_proposals.select(:decidim_component_id).distinct)
+                                      components.where(id: public_proposals.select(:decidim_component_id).distinct)
                                     else
-                                      Decidim::PublicComponents.for(content_block.organization, manifest_name: "proposals")
+                                      components
                                     end
         end
 
@@ -50,9 +51,11 @@ module Decidim
         private
 
         def public_proposals
-          @public_proposals ||= Decidim::Proposals::FilteredProposals.for(
-            Decidim::PublicComponents.for(content_block.organization, manifest_name: "proposals")
-          ).not_status(:rejected).not_withdrawn.published
+          @public_proposals ||= Decidim::Proposals::FilteredProposals.for(components).not_status(:rejected).not_withdrawn.published
+        end
+
+        def components
+          @components ||= components_for(content_block).published
         end
       end
     end
