@@ -1,0 +1,4 @@
+<!-- insert_before "div.participatory-space__container" -->
+
+LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+<%= append_javascript_pack_tag("decidim_homepage_proposals") %>
