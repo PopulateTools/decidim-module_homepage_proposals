@@ -1,30 +1,46 @@
 <%= filter_form_for(filter, decidim_participatory_processes_path, id: "filters-form-#{model.id}") do |form| %>
-  <div class="row" data-filters-container>
-    <div class="columns flex-v-center">
-      <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></p>
-      <% if ordered_scopes_descendants_for_select.present? %>
-        <%= scopes_select_field form, :scope_id, root: nil %>
-      <% end %>
-      <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.about") %></p>
-      <div class="medium-2">
-        <%= form.categories_select :category_id,
-                                   categories_filter,
-                                   disable_parents: false,
-                                   label: false,
-                                   selected: filter.category_id,
-                                   include_blank: t("decidim.homepage_proposals.proposal_at_a_glance.filters.default_categories") %>
-      </div>
-      <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.in") %></p>
-      <div class="medium-2 large-3">
-        <%= form.select :component_id,
-                        options_for_default_component,
-                        label: false,
-                        selected: filter.component_id,
-                        data: { placeholder: t("decidim.homepage_proposals.proposal_at_a_glance.filters.components") }
-        %>
+  <% filters_presence = {
+       scopes: ordered_scopes_descendants_for_select.present?,
+       categories: categories_filter.exists?,
+       linked_components: linked_components.count > 1
+     }
+  %>
+
+  <% if filters_presence.values.any? %>
+    <div class="row" data-filters-container>
+      <div class="columns flex-v-center">
+        <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></p>
+        <% if filters_presence[:scopes] %>
+          <%= scopes_select_field form, :scope_id, root: nil %>
+        <% end %>
+
+        <% if filters_presence[:categories] %>
+          <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.about") %></p>
+          <div class="medium-2">
+            <%= form.categories_select :category_id,
+                                       categories_filter,
+                                       disable_parents: false,
+                                       label: false,
+                                       selected: filter.category_id,
+                                       include_blank: t("decidim.homepage_proposals.proposal_at_a_glance.filters.default_categories") %>
+          </div>
+        <% end %>
+
+
+        <% if filters_presence[:linked_components] %>
+          <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.in") %></p>
+          <div class="medium-2 large-3">
+            <%= form.select :component_id,
+                            options_for_default_component,
+                            label: false,
+                            selected: filter.component_id,
+                            data: { placeholder: t("decidim.homepage_proposals.proposal_at_a_glance.filters.components") }
+            %>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
+  <% end %>
 
   <%= hidden_field_tag("filter_config[order]", order_config, data: { filter_config: "" }) %>
   <%= hidden_field_tag("filter_config[max_results]", max_results_config, data: { filter_config: "" }) %>
