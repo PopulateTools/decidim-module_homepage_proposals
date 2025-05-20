@@ -15,6 +15,7 @@ en:
           search: Search
         proposals_slider_settings_form:
           activate_filters: Activate filters
+          activate_filters_help: Enable filters to allow users to choose a different component than the one selected here
           block_title: Block title
           default_linked_component: Component displayed by default
           display_proposals_body: Display proposals body
