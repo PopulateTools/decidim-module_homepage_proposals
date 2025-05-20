@@ -25,20 +25,8 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="columns medium-3">
-      <div class="clear-filters">
-        <%= link_to t("decidim.homepage_proposals.proposal_at_a_glance.filters.clear_filters"), decidim_participatory_processes_path(anchor: "proposals-slider-#{model.id}"), class: "button button--secondary small button--sc" %>
-      </div>
-    </div>
-    <div class="columns medium-3">
-      <div class="all-proposals flex-justify-end">
-        <%= link_to view_all_text_config, view_all_url_config, class: "button button--secondary small button--sc" %>
-      </div>
-    </div>
-  </div>
 
   <%= hidden_field_tag("filter_config[order]", order_config, data: { filter_config: "" }) %>
   <%= hidden_field_tag("filter_config[max_results]", max_results_config, data: { filter_config: "" }) %>
-  <%= hidden_field_tag("filter_config[content_block]", data[:proposals_slider], data: { filter_config: "" }) %>
+  <%= hidden_field_tag("filter_config[content_block]", data[:proposals_slider], data: { filter_config: "", view_all_url_config: }) %>
 <% end %>

@@ -28,6 +28,14 @@ $("[data-proposals-slider]").each((_i, elem) => {
                 const filtersContainerReplacement = div.querySelector("[data-filters-container]");
                 filtersContainer.replaceWith(filtersContainerReplacement)
 
+                const viewAllUrlConfig = div.querySelector("input[data-view-all-url-config]").dataset.viewAllUrlConfig;
+
+                if (viewAllUrlConfig !== undefined) {
+                    const viewAllLink = document.querySelector(`[data-proposals-slider='${slider.sliderId}'] [data-view-all-link]`);
+                    if (viewAllLink) {
+                        viewAllLink.setAttribute("href", viewAllUrlConfig);
+                    }
+                }
                 div.remove();
             });
     });

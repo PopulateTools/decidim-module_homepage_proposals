@@ -18,9 +18,9 @@ module Decidim
         include Decidim::ScopesHelper
 
         def default_linked_component_path
+          return unless Decidim::Component.exists?(selected_component_id)
+
           main_component_path(Decidim::Component.find(selected_component_id))
-        rescue ActiveRecord::RecordNotFound
-          root_path
         end
 
         def options_for_default_component
