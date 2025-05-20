@@ -33,7 +33,7 @@ module Decidim
             settings.attribute :activate_filters, type: :boolean, default: false
             settings.attribute :linked_components_id, type: :array
             settings.attribute :default_linked_component, type: :integer
-            settings.attribute :order, type: :string
+            settings.attribute :order, type: :string, default: "most_recent"
             settings.attribute :max_results, type: :integer, default: 12
             settings.attribute :block_title, type: :text, translated: true, preview: -> { I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title") }
             settings.attribute :view_all_text, type: :text, translated: true
@@ -56,7 +56,7 @@ module Decidim
               settings.attribute :activate_filters, type: :boolean, default: false
               settings.attribute :linked_components_id, type: :array
               settings.attribute :default_linked_component, type: :integer
-              settings.attribute :order, type: :string
+              settings.attribute :order, type: :string, default: "most_recent"
               settings.attribute :max_results, type: :integer, default: 12
               settings.attribute :block_title, type: :text, translated: true, preview: -> { I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title") }
               settings.attribute :view_all_text, type: :text, translated: true
