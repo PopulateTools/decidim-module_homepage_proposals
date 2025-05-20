@@ -21,7 +21,7 @@ module Decidim
         end
 
         def options_for_default_component
-          components = Decidim::Component.where(id: content_block.settings.linked_components_id.compact)
+          components = Decidim::Component.where(id: selectable_default_component_ids)
           options = components.map do |component|
             ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
           end
@@ -48,7 +48,15 @@ module Decidim
           :block_title
         end
 
+        def hide_default_component_select?
+          selectable_default_component_ids.count < 2
+        end
+
         private
+
+        def selectable_default_component_ids
+          @selectable_default_component_ids ||= content_block.settings.linked_components_id.compact_blank
+        end
 
         def public_proposals
           @public_proposals ||= Decidim::Proposals::FilteredProposals.for(components).not_status(:rejected).not_withdrawn.published
