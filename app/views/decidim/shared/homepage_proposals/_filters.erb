@@ -7,15 +7,18 @@
   %>
 
   <% if filters_presence.values.any? %>
-    <div class="row" data-filters-container>
+    <div class="row text-right" data-filters-container>
       <div class="columns flex-v-center">
-        <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></p>
+        <span><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></span>
+
         <% if filters_presence[:scopes] %>
-          <%= scopes_select_field form, :scope_id, root: nil %>
+          <div class="pl-4">
+            <%= scopes_select_field form, :scope_id, root: nil, html_options: { class: "ml-4" } %>
+          </div>
         <% end %>
 
         <% if filters_presence[:categories] %>
-          <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.about") %></p>
+          <span class="px-4"><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.about") %></span>
           <div class="medium-2">
             <%= form.categories_select :category_id,
                                        categories_filter,
@@ -28,7 +31,7 @@
 
 
         <% if filters_presence[:linked_components] %>
-          <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.in") %></p>
+          <span class="px-4"><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.in") %></span>
           <div class="medium-2 large-3">
             <%= form.select :component_id,
                             options_for_default_component,
