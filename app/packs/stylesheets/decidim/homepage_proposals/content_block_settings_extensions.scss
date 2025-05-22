@@ -1,1 +1,7 @@
 @import "tom-select/dist/scss/tom-select";
+
+[data-default-linked-component-row] {
+  .help-text {
+    @apply text-alert;
+  }
+}
