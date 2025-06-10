@@ -59,7 +59,21 @@ module Decidim
         end
 
         def public_proposals
-          @public_proposals ||= Decidim::Proposals::FilteredProposals.for(components).not_status(:rejected).not_withdrawn.published
+          @public_proposals ||= proposals_with_state_not_rejected.or(proposals_without_state_not_answered)
+        end
+
+        def proposals_with_state_not_rejected
+          base_proposals_join.where.not(decidim_proposals_proposal_states: { token: :rejected })
+        end
+
+        def proposals_without_state_not_answered
+          base_proposals_join.where(decidim_proposals_proposal_state_id: nil, answered_at: nil)
+        end
+
+        def base_proposals_join
+          Decidim::Proposals::FilteredProposals
+            .for(components).not_withdrawn.published
+            .left_outer_joins(:proposal_state)
         end
 
         def components
