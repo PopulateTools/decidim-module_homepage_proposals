@@ -1,6 +1,6 @@
 <%= filter_form_for(filter, decidim_participatory_processes_path, id: "filters-form-#{model.id}") do |form| %>
   <% filters_presence = {
-       scopes: ordered_scopes_descendants_for_select.present?,
+       scopes: ordered_scopes_descendants_for_select.present? && ordered_scopes_descendants_for_select.count > 1,
        categories: categories_filter.exists?,
        linked_components: linked_components.count > 1
      }
