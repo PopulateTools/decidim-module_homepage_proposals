@@ -1,6 +1,6 @@
 <%= filter_form_for(filter, decidim_participatory_processes_path, id: "filters-form-#{model.id}") do |form| %>
   <% filters_presence = {
-       scopes: ordered_scopes_descendants_for_select.present? && ordered_scopes_descendants_for_select.count > 1,
+       scopes: available_scopes_ids.present?,
        categories: categories_filter.exists?,
        linked_components: linked_components.count > 1
      }
@@ -13,7 +13,13 @@
 
         <% if filters_presence[:scopes] %>
           <div class="pl-4">
-            <%= scopes_select_field form, :scope_id, root: nil, html_options: { class: "ml-4" } %>
+            <%= form.select(
+                  :scope_id,
+                  scopes_for_select,
+                  { label: false, include_blank: t("decidim.homepage_proposals.proposal_at_a_glance.filters.default_scope") },
+                  { class: "ml-4" }
+                )
+            %>
           </div>
         <% end %>
 
