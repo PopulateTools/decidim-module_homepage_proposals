@@ -1,41 +1,57 @@
 <%= filter_form_for(filter, decidim_participatory_processes_path, id: "filters-form-#{model.id}") do |form| %>
-  <div class="row">
-    <div class="columns flex-v-center">
-      <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></p>
-      <%= scopes_select_field form, :scope_id, root: nil %>
-      <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.about") %></p>
-      <div class="medium-2">
-        <%= form.categories_select :category_id,
-                                   categories_filter,
-                                   disable_parents: false,
-                                   label: false,
-                                   selected: filter.category_id,
-                                   include_blank: t("decidim.homepage_proposals.proposal_at_a_glance.filters.default_categories") %>
-      </div>
-      <p><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.in") %></p>
-      <div class="medium-2 large-3">
-        <%= form.select :component_id,
-                        options_for_default_component,
-                        label: false,
-                        selected: filter.component_id,
-                        data: { placeholder: t("decidim.homepage_proposals.proposal_at_a_glance.filters.components") }
-        %>
+  <% filters_presence = {
+       scopes: available_scopes_ids.present?,
+       categories: categories_filter.exists?,
+       linked_components: linked_components.count > 1
+     }
+  %>
+
+  <% if filters_presence.values.any? %>
+    <div class="row text-right" data-filters-container>
+      <div class="columns flex-v-center">
+        <span><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.intro") %></span>
+
+        <% if filters_presence[:scopes] %>
+          <div class="pl-4">
+            <%= form.select(
+                  :scope_id,
+                  scopes_for_select,
+                  { label: false, include_blank: t("decidim.homepage_proposals.proposal_at_a_glance.filters.default_scope") },
+                  { class: "ml-4" }
+                )
+            %>
+          </div>
+        <% end %>
+
+        <% if filters_presence[:categories] %>
+          <span class="px-4"><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.about") %></span>
+          <div class="medium-2">
+            <%= form.categories_select :category_id,
+                                       categories_filter,
+                                       disable_parents: false,
+                                       label: false,
+                                       selected: filter.category_id,
+                                       include_blank: t("decidim.homepage_proposals.proposal_at_a_glance.filters.default_categories") %>
+          </div>
+        <% end %>
+
+
+        <% if filters_presence[:linked_components] %>
+          <span class="px-4"><%= I18n.t("decidim.homepage_proposals.proposal_at_a_glance.filters.in") %></span>
+          <div class="medium-2 large-3">
+            <%= form.select :component_id,
+                            options_for_default_component,
+                            label: false,
+                            selected: filter.component_id,
+                            data: { placeholder: t("decidim.homepage_proposals.proposal_at_a_glance.filters.components") }
+            %>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="columns medium-3">
-      <div class="clear-filters">
-        <%= link_to t("decidim.homepage_proposals.proposal_at_a_glance.filters.clear_filters"), decidim_participatory_processes_path(anchor: "proposals-slider-#{model.id}"), class: "button button--secondary small button--sc" %>
-      </div>
-    </div>
-    <div class="columns medium-3">
-      <div class="all-proposals flex-justify-end">
-        <%= link_to t("decidim.homepage_proposals.proposal_at_a_glance.filters.all_proposals"), default_linked_component_path, class: "button button--secondary small button--sc" %>
-      </div>
-    </div>
-  </div>
+  <% end %>
 
   <%= hidden_field_tag("filter_config[order]", order_config, data: { filter_config: "" }) %>
   <%= hidden_field_tag("filter_config[max_results]", max_results_config, data: { filter_config: "" }) %>
+  <%= hidden_field_tag("filter_config[content_block]", data[:proposals_slider], data: { filter_config: "", view_all_url_config: }) %>
 <% end %>

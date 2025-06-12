@@ -1,7 +1,22 @@
+import TomSelect from "tom-select/dist/cjs/tom-select.popular";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const config = {
+    plugins: ["remove_button", "dropdown_input"],
+    allowEmptyOption: true
+  };
+  const linkedComponentsMultiselectContainers = document.querySelectorAll(
+    ".js-linked-components-multiselect"
+  );
+
+  linkedComponentsMultiselectContainers.forEach((container) => new TomSelect(container, config));
+});
+
 $(document).ready(function() {
     $('#content_block_settings_linked_components_id').on('change', function() {
         var selectedOptions = $(this).val(); // Get the selected options from the multiselect field
         var $selectedOptionsField = $('#content_block_settings_default_linked_component'); // Get the select field for the selected options
+        const $defaultLinkedComponentRow = $("[data-default-linked-component-row]");
 
         $selectedOptionsField.empty(); // Clear the select field
 
@@ -11,6 +26,11 @@ $(document).ready(function() {
                 var optionText = $('#content_block_settings_linked_components_id option[value="' + option + '"]').text();
                 $selectedOptionsField.append($('<option>', { value: option, text: optionText }));
             });
+          if (selectedOptions.length == 1) {
+            $defaultLinkedComponentRow.hide();
+          } else {
+            $defaultLinkedComponentRow.show();
+          }
         }
     });
 });

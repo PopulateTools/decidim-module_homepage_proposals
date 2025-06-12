@@ -19,6 +19,10 @@ module Decidim
       def load_seed
         nil
       end
+
+      config.to_prepare do
+        Decidim::Admin::ContentBlockCell.include(Decidim::HomepageProposals::Admin::ContentBlockCellCustomization)
+      end
     end
   end
 end

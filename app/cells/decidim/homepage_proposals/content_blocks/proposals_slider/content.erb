@@ -2,9 +2,15 @@
   <h2 class="home__section-title">
     <%= title %>
   </h2>
+  <% if view_all_url_config.present? %>
+    <%= link_to view_all_url_config, class: "button button__sm button__text-secondary", data: { view_all_link: model.id }  do %>
+      <%= view_all_text_config %>
+      <%= icon "arrow-right-line", class: "fill-current" %>
+    <% end %>
+  <% end %>
 </div>
 <div class="filters_container" <%= 'style="display: none"' unless settings.activate_filters %>>
-  <%= render partial: "decidim/shared/homepage_proposals/filters" %>
+  <%= filters %>
 </div>
 <div id="<%= "proposals-slider-#{model.id}" %>">
   <div class="glide margin-top-3">

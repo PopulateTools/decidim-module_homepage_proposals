@@ -5,6 +5,7 @@ module Decidim
     module ContentBlocks
       class ProposalsSliderSettingsFormCell < Decidim::ViewModel
         include ActionView::Helpers::FormOptionsHelper
+        include Decidim::ContentBlocks::HasRelatedComponents
 
         alias form model
 
@@ -20,7 +21,7 @@ module Decidim
         end
 
         def options_for_default_component
-          components = Decidim::Component.where(id: content_block.settings.linked_components_id.compact)
+          components = Decidim::Component.where(id: selectable_default_component_ids)
           options = components.map do |component|
             ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
           end
@@ -28,7 +29,11 @@ module Decidim
         end
 
         def proposals_components
-          @proposals_components ||= Decidim::PublicComponents.for(content_block.organization, manifest_name: "proposals")
+          @proposals_components ||= if public_proposals.exists?
+                                      components.where(id: public_proposals.select(:decidim_component_id).distinct)
+                                    else
+                                      components
+                                    end
         end
 
         def order_options
@@ -37,6 +42,28 @@ module Decidim
             [I18n.t("least_recent", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show"), "least_recent"],
             [I18n.t("random", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form.show"), "random"]
           ]
+        end
+
+        def content_block_name_attribute
+          :block_title
+        end
+
+        def hide_default_component_select?
+          selectable_default_component_ids.count < 2
+        end
+
+        private
+
+        def selectable_default_component_ids
+          @selectable_default_component_ids ||= content_block.settings.linked_components_id.compact_blank
+        end
+
+        def public_proposals
+          @public_proposals ||= Decidim::Proposals::SliderProposals.for(components)
+        end
+
+        def components
+          @components ||= components_for(content_block).published
         end
       end
     end

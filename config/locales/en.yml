@@ -15,27 +15,36 @@ en:
           search: Search
         proposals_slider_settings_form:
           activate_filters: Activate filters
+          activate_filters_help: Enable filters to allow users to choose a different
+            component than the one selected here
           block_title: Block title
           default_linked_component: Component displayed by default
+          display_proposals_body: Display proposals body
+          display_proposals_image: Display proposals image
+          display_proposals_state: Display proposals state
           linked_components_id: Components available in filters
+          max_length_of_body: Maximumn characters of body (0 to not truncate)
+          max_length_of_title: Maximumn characters of title (0 to not truncate)
           max_results: Maximum amount of elements to show
           order: Order elements by
+          select_components: Select components
           show:
             least_recent: Least recent
             most_recent: Most recent
             random: Random
+          view_all_text: View all link text
+          view_all_url: View all link URL
       proposal_at_a_glance:
         filters:
           about: about
           all_proposals: View all
           categories: Categories
-          clear_filters: Clear filters
           components: Components
           default_categories: All categories
           default_components: All components
           default_scope: All scopes
           in: in
-          intro: I'd like to see elements from
+          intro: I'd like to see elements
           scope: Scope
         learn_more: View more
         no_proposals:

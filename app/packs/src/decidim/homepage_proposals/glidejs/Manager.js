@@ -25,6 +25,10 @@ export default class Manager {
         return '/proposals_slider/refresh_proposals' + this.filterURIParams();
     }
 
+    FilterUrl() {
+        return 'proposals_slider/filters' + this.filterURIParams();
+    }
+
     // @return String - Filter params query string
     filterURIParams() {
         const filterForm = this.$formFilter;
@@ -132,6 +136,7 @@ export default class Manager {
     // @return void
     createProposals(proposals) {
         for (let i = 0; i < proposals.length; i++) {
+
             let proposalGlide = new Proposal(proposals[i])
             this.$proposalsGlideItems.append(proposalGlide.render());
             this.$glideBullets.find(".glide__bullet:last").before(proposalGlide.bullet(i));

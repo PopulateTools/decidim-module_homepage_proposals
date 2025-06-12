@@ -15,27 +15,35 @@ ca:
           search: Cerca
         proposals_slider_settings_form:
           activate_filters: Activa filtres
+          activate_filters_help: Activar filtres per permetre als usuaris triar un component diferent del seleccionat aquí
           block_title: Titol del bloc
           default_linked_component: Component mostrat per defecte
+          display_proposals_body: Mostrar cos de les propostes
+          display_proposals_image: Mostrar imatge de les propostes
+          display_proposals_state: Mostrar estat de les propostes
           linked_components_id: Components disponibles al filtre
+          max_length_of_body: Màxims caràcters del cos (0 per no truncar)
+          max_length_of_title: Màxims caràcters del títol (0 per no truncar)
           max_results: Nombre màxim d'elements a mostrar
           order: Ordena elements per
+          select_components: Selecciona components
           show:
             least_recent: Menys recent
             most_recent: Més recent
             random: Aleatori
+          view_all_text: Text de lenllaç de veure tot
+          view_all_url: URL de lenllaç de veure tot
       proposal_at_a_glance:
         filters:
           about: sobre
           all_proposals: Veure tot
           categories: Categories
-          clear_filters: Esborra els filtres
           components: Components
           default_categories: Totes les categories
           default_components: Tots els components
           default_scope: Veure tots els àmbits
           in: a
-          intro: Veure contringuts de
+          intro: Veure contringuts
           scope: Àmbit
         learn_more: Més
         no_proposals:

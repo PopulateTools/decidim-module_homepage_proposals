@@ -1,14 +1,68 @@
 <% form.fields_for :settings, form.object.settings do |settings_fields| %>
-  <%= settings_fields.check_box :activate_filters, label: t(".activate_filters") %>
-  <%= settings_fields.select :linked_components_id,
-                             options_for_proposals_components,
-                             { include_blank: true, label: t(".linked_components_id") },
-                             { multiple: true, class: "chosen-select" } %>
-  <%= settings_fields.select :default_linked_component,
-                 options_for_default_component,
-                 { include_blank: false, label: t(".default_linked_component") },
-                 class: "chosen-select" %>
-  <%= settings_fields.select :order, order_options, prompt: "", label: t(".order") %>
-  <%= settings_fields.select :max_results, [*(4..12)], prompt: "", label: t(".max_results") %>
-  <%= settings_fields.translated :text_field, :block_title, label: t(".block_title") %>
+  <div class="row column">
+    <%= settings_fields.check_box :activate_filters, label: t("activate_filters", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
+
+  <div class="row column">
+    <label><%= t(".linked_components_id") %></label>
+    <%= hidden_field_tag("content_block[settings][linked_components_id][]") %>
+    <%= select_tag(
+          "content_block[settings][linked_components_id]",
+          options_for_proposals_components,
+          {
+            label: t(".linked_components_id"),
+            include_blank: true,
+            placeholder: t("select_components", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form"),
+            class: "chosen-select js-linked-components-multiselect",
+            multiple: true
+          }
+        ) %>
+  </div>
+
+  <div class="row column" data-default-linked-component-row <%= 'style="display: none"' if hide_default_component_select? %>>
+    <%= settings_fields.select :default_linked_component,
+                   options_for_default_component,
+                   { include_blank: false, label: t(".default_linked_component"), help_text: t("activate_filters_help", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form")},
+                   class: "chosen-select" %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.select :order, order_options, prompt: "", label: t(".order") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.select :max_results, [*(4..12)], prompt: "", label: t(".max_results") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.translated :text_field, :block_title, label: t(".block_title") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.translated :text_field, :view_all_text, label: t("view_all_text", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.text_field :view_all_url, label: t("view_all_url", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.number_field :max_length_of_title, label: t("max_length_of_title", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.number_field :max_length_of_body, label: t("max_length_of_body", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.check_box :display_proposals_state, label: t("display_proposals_state", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.check_box :display_proposals_body, label: t("display_proposals_body", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.check_box :display_proposals_image, label: t("display_proposals_image", scope: "decidim.homepage_proposals.content_blocks.proposals_slider_settings_form") %>
+  </div>
 <% end %>

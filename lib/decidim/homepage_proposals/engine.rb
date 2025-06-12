@@ -33,9 +33,40 @@ module Decidim
             settings.attribute :activate_filters, type: :boolean, default: false
             settings.attribute :linked_components_id, type: :array
             settings.attribute :default_linked_component, type: :integer
-            settings.attribute :order, type: :string
+            settings.attribute :order, type: :string, default: "most_recent"
             settings.attribute :max_results, type: :integer, default: 12
             settings.attribute :block_title, type: :text, translated: true, preview: -> { I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title") }
+            settings.attribute :view_all_text, type: :text, translated: true
+            settings.attribute :view_all_url, type: :text
+            settings.attribute :display_proposals_state, type: :boolean, default: true
+            settings.attribute :display_proposals_body, type: :boolean, default: true
+            settings.attribute :display_proposals_image, type: :boolean, default: true
+            settings.attribute :max_length_of_body, type: :integer, default: 150
+            settings.attribute :max_length_of_title, type: :integer, default: 40
+          end
+        end
+
+        [:participatory_process_homepage, :participatory_process_group_homepage, :assembly_homepage]. each do |scope_name|
+          Decidim.content_blocks.register(scope_name, "#{scope_name}_proposals_slider") do |content_block|
+            content_block.cell = "decidim/homepage_proposals/content_blocks/proposals_slider"
+            content_block.public_name_key = "decidim.homepage_proposals.content_blocks.proposals_slider.name"
+            content_block.settings_form_cell = "decidim/homepage_proposals/content_blocks/proposals_slider_settings_form"
+            content_block.component_manifest_name = "proposals"
+            content_block.settings do |settings|
+              settings.attribute :activate_filters, type: :boolean, default: false
+              settings.attribute :linked_components_id, type: :array
+              settings.attribute :default_linked_component, type: :integer
+              settings.attribute :order, type: :string, default: "most_recent"
+              settings.attribute :max_results, type: :integer, default: 12
+              settings.attribute :block_title, type: :text, translated: true, preview: -> { I18n.t("decidim.homepage_proposals.proposal_at_a_glance.title") }
+              settings.attribute :view_all_text, type: :text, translated: true
+              settings.attribute :view_all_url, type: :text
+              settings.attribute :display_proposals_state, type: :boolean, default: true
+              settings.attribute :display_proposals_body, type: :boolean, default: true
+              settings.attribute :display_proposals_image, type: :boolean, default: true
+              settings.attribute :max_length_of_body, type: :integer, default: 150
+              settings.attribute :max_length_of_title, type: :integer, default: 40
+            end
           end
         end
       end
