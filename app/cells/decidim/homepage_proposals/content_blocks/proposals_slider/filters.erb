@@ -1,1 +1,23 @@
-<%= render partial: "decidim/shared/homepage_proposals/filters" %>
+<%= filter_form_for filter, url_for(only_path: true), class: "new_filter", id: "filters-form-#{model.id}", data: { filters: "", component: "accordion" } do |form| %>
+  <div class="row text-right flex flex-col gap-6 items-end" data-filters-container="">
+    <div class="columns flex items-center gap-6 w-full justify-end">
+      <h3 class="m-0 mr-2">
+        <%= t("filter_by", scope: "decidim.homepage_proposals.content_blocks.proposals_slider.filters_small_view") %>
+      </h3>
+      <div class="medium-2 large-3">
+        <%= form.select :component_id,
+          options_for_default_component,
+          label: false,
+          selected: filter.component_id,
+          data: { placeholder: t("decidim.homepage_proposals.proposal_at_a_glance.filters.components") }
+        %>
+      </div>
+    </div>
+    <div class="reveal__content w-full mt-0">
+      <p id="filter-help-text-<%= model.id %>" class="row filter-help" role="menuitem" aria-disabled="true"><%= t("help", scope: "decidim.shared.filter_form_help") %></p>
+      <%= hidden_field_tag("filter_config[order]", order_config, data: { filter_config: "" }) %>
+      <%= hidden_field_tag("filter_config[max_results]", max_results_config, data: { filter_config: "" }) %>
+      <%= hidden_field_tag("filter_config[content_block]", data[:proposals_slider], data: { filter_config: "", view_all_url_config: }) %>
+    </div>
+  </div>
+<% end %>

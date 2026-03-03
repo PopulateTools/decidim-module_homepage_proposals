@@ -8,14 +8,12 @@ module Decidim
 
         delegate :settings, to: :model
 
-        include Cell::ViewModel::Partial
         include Core::Engine.routes.url_helpers
         include Decidim::IconHelper
         include ActionView::Helpers::FormOptionsHelper
         include Decidim::FiltersHelper
         include Decidim::FilterResource
         include Decidim::ComponentPathHelper
-        include Decidim::ScopesHelper
 
         def default_linked_component_path
           return unless Decidim::Component.exists?(selected_component_id)
@@ -37,8 +35,6 @@ module Decidim
 
         def default_filter_params
           {
-            scope_id: nil,
-            category_id: nil,
             component_id: nil
           }
         end
