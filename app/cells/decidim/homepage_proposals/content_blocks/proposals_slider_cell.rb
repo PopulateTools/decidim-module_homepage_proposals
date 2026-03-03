@@ -110,6 +110,10 @@ module Decidim
         def base_proposals_relation
           Decidim::Proposals::SliderProposals.for(selected_component_id)
         end
+
+        def extra_classes
+          "slider-content-block"
+        end
       end
     end
   end
