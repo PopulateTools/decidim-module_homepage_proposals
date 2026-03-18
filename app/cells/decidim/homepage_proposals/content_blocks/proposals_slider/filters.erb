@@ -1,4 +1,4 @@
-<%= filter_form_for filter, controller.url_for(only_path: true), class: "new_filter", id: "filters-form-#{model.id}", data: { filters: "", component: "accordion" } do |form| %>
+<%= filter_form_for filter, root_path, class: "new_filter", id: "filters-form-#{model.id}", data: { filters: "", component: "accordion" } do |form| %>
   <div class="row text-right flex flex-col gap-6 items-end" data-filters-container="">
     <div class="columns flex items-center gap-6 w-full justify-end">
       <h3 class="m-0 mr-2">
